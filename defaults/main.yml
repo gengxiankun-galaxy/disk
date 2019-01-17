@@ -1,2 +1,5 @@
 ---
 # defaults file for disk
+DISK: ''
+PARTITION: ''
+MOUNT_DIR: ''
