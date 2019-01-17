@@ -1,0 +1,11 @@
+---
+# tasks file for disk
+- name: New Disk Partition
+  script: scripts/disk.sh "{{ DISK }}"
+  ignore_errors: yes
+
+- name: New Disk Format(ext4)
+  filesystem: fstype=ext4 dev="{{ PARTITION }}" opts="-cc"
+
+- name: New Disk Mount
+  mount: name="{{ MOUNT_DIR }}" src="{{ PARTITION }}" fstype=ext4 state=mounted
