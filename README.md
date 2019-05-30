@@ -2,6 +2,11 @@ DISK
 =========
 Format the disk and mount it via ansible
 
+Installation
+------------
+
+`ansible-galaxy install gengxiankun.disk`
+
 Role Variables
 --------------
 
