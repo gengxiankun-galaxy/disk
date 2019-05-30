@@ -17,7 +17,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: disk }
+         - gengxiankun.disk
 
 License
 -------
