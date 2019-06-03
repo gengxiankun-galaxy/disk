@@ -9,3 +9,6 @@
 
 - name: New Disk Mount
   mount: name="{{ DISK_MOUNT_DIR }}" src="{{ DISK_PARTITION }}" fstype={{ DISK_FSTYPE }} state=mounted
+
+- name: Boot Disk Mount
+  shell: 'IFMOUNT=$(grep "mount {{ DISK_PARTITION }} {{ DISK_MOUNT_DIR }}" /etc/rc.local); if [[ -z $IFMOUNT ]];then echo "mount {{ DISK_PARTITION }} {{ DISK_MOUNT_DIR }}" >> /etc/rc.local; fi'
