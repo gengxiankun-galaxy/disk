@@ -5,7 +5,8 @@
   ignore_errors: yes
 
 - name: New Disk Format
-  filesystem: fstype={{ DISK_FSTYPE }} dev="{{ DISK_PARTITION }}" opts="-cc"
+  #filesystem: fstype={{ DISK_FSTYPE }} dev="{{ DISK_PARTITION }}" opts="-cc"
+  shell: 'mkfs.{{ DISK_FSTYPE }} {{ DISK_PARTITION }}'
 
 - name: New Disk Mount
   mount: name="{{ DISK_MOUNT_DIR }}" src="{{ DISK_PARTITION }}" fstype={{ DISK_FSTYPE }} state=mounted
