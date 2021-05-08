@@ -1,15 +1,13 @@
 ---
 # tasks file for disk
-- name: New Disk Partition
-  script: scripts/disk.sh "{{ DISK }}"
-  ignore_errors: yes
+- name: format disk
+  shell: 'mkfs.{{ DISK_FSTYPE }} -F -L {{ DISK_MOUNT_DIR }} /dev/{{ DISK_DEV }}'
 
-- name: New Disk Format
-  #filesystem: fstype={{ DISK_FSTYPE }} dev="{{ DISK_PARTITION }}" opts="-cc"
-  shell: 'mkfs.{{ DISK_FSTYPE }} {{ DISK_PARTITION }}'
+- name: make mount node
+  shell: 'rm -rf /{{ DISK_MOUNT_DIR }} && mkdir /{{ DISK_MOUNT_DIR }}'
 
-- name: New Disk Mount
-  mount: name="{{ DISK_MOUNT_DIR }}" src="{{ DISK_PARTITION }}" fstype={{ DISK_FSTYPE }} state=mounted
+- name: update fstab
+  lineinfile: dest=/etc/fstab line="LABEL={{ DISK_MOUNT_DIR }}             /{{ DISK_MOUNT_DIR }}     {{ DISK_FSTYPE }}    defaults,noatime,nodiratime        0 0"
 
-- name: Boot Disk Mount
-  shell: 'IFMOUNT=$(grep "mount {{ DISK_PARTITION }} {{ DISK_MOUNT_DIR }}" /etc/rc.local); if [[ -z $IFMOUNT ]];then echo "mount {{ DISK_PARTITION }} {{ DISK_MOUNT_DIR }}" >> /etc/rc.local; fi'
+- name: mount disk
+  shell: 'mount -a'

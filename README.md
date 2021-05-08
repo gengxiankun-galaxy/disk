@@ -12,8 +12,7 @@ Role Variables
 
 parameter | description
 ------------ | -------------
-DISK | disk name
-DISK_PARTITION | disk partition
+DISK_DEV | disk name
 DISK_MOUNT_DIR | mounted directory
 DISK_FSTYPE | file format
 

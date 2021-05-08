@@ -1,7 +1,6 @@
 ---
 # defaults file for disk
 
-DISK: ''
-DISK_PARTITION: ''
-DISK_MOUNT_DIR: ''
+DISK_DEV: 'vdb'
+DISK_MOUNT_DIR: 'data1'
 DISK_FSTYPE: 'ext4'
